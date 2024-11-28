@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using ProjetoLogin.Models;
+using ProjetoLogin.Models.Usuarios;
 
 namespace ProjetoLogin.Database
 {
-    public class LoginContext : DbContext
+	public class LoginContext : DbContext
     {
         public LoginContext(DbContextOptions<LoginContext> options)
             : base(options)

@@ -1,18 +1,19 @@
-﻿using ProjetoLogin.Models.Enums;
-using ProjetoLogin.Models;
+﻿using ProjetoLogin.Models.Usuarios;
+using ProjetoLogin.Models.Usuarios.Enums;
+using ProjetoLogin.Models.Usuarios.Filters;
+using ProjetoLogin.Models.Usuarios.ViewModels;
 
 namespace ProjetoLogin.Database.Repositories.Interfaces
 {
-    public interface IUsuariosRepository
+	public interface IUsuariosRepository
     {
-        Task<bool?> CreateAsync(Usuario usuario);
+	    Task<UsuarioPaginated> GetAllAsync(UsuarioFilter filter);
+	    Task<Usuario?> GetByIdAsync(int id);
+	    Task<Usuario?> GetByEmailAsync(string email);
+		Task<bool?> CreateAsync(Usuario usuario);
         Task<bool?> UpdateAsync(Usuario usuario);
         Task<bool?> UpdateStatusAsync(int id, Status status);
-        Task<List<Usuario>> GetAllAsync(Status? status);
-        Task<bool> CheckCpfCnpjAsync(string cpfCnpj);
-        Task<Usuario?> GetByIdAsync(int id);
-        Task<Usuario?> GetByEmailAsync(string email);
-        Task<Usuario?> GetUserAsync(string username, string password);
+        Task<bool> CheckEmailAsync(string cpfCnpj);
         Task<bool?> DeleteAsync(int id);
     }
 }

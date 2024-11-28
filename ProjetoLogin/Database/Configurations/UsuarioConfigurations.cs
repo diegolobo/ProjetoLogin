@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using ProjetoLogin.Models;
+using ProjetoLogin.Models.Usuarios;
 
 namespace ProjetoLogin.Database.Configurations
 {
@@ -11,24 +11,13 @@ namespace ProjetoLogin.Database.Configurations
         {
             _ = builder.HasKey(u => u.Id);
 
-            _ = builder.Property(u => u.NomeCommpleto)
-                .HasMaxLength(Pessoa.NomeMaxLength)
+            _ = builder.Property(u => u.Nome)
+                .HasMaxLength(Usuario.NomeMaxLength)
                 .IsRequired();
 
-            _ = builder.Property(u => u.Password)
+            _ = builder.Property(u => u.Senha)
 				.HasMaxLength(Usuario.PasswordHashMaxLength)
 				.IsRequired();
-
-			_ = builder.Property(u => u.DataNascimento)
-                .IsRequired();
-
-            _ = builder.Property(u => u.CpfCnpj)
-                .HasMaxLength(Pessoa.CpfCnpjMaxLength)
-                .IsRequired();
-
-            _ = builder.Property(u => u.Telefone)
-                .HasMaxLength(Pessoa.TelefoneMaxLength)
-                .IsRequired();
 
             _ = builder.Property(u => u.Email)
                 .HasMaxLength(Usuario.EmailMaxLength)

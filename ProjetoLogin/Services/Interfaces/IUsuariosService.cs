@@ -1,16 +1,18 @@
-﻿using ProjetoLogin.Models.Enums;
-using ProjetoLogin.Models.ViewModels.Usuarios;
+﻿using ProjetoLogin.Models.Usuarios.Enums;
+using ProjetoLogin.Models.Usuarios.Filters;
+using ProjetoLogin.Models.Usuarios.ViewModels;
 
 namespace ProjetoLogin.Services.Interfaces
 {
 	public interface IUsuariosService
     {
-        Task<bool?> CreateAsync(PostUsuario usuario);
+	    Task<UsuarioPaginated> GetAllAsync(UsuarioFilter filter);
+	    Task<PutUsuario?> GetByIdAsync(int id);
+		Task<bool?> CreateAsync(PostUsuario usuario);
         Task<bool?> UpdateAsync(PutUsuario usuario);
         Task<bool?> UpdateStatusAsync(int id, Status status);
-        Task<List<PutUsuario>> GetAllAsync(Status? status);
-        Task<PutUsuario> GetByIdAsync(int id);
         Task<string> GenerateJwtToken(AuthenticateRequest request);
         Task<int?> ValidateJwtToken(string? token);
+        Task<bool?> DeleteAsync(int id);
     }
 }

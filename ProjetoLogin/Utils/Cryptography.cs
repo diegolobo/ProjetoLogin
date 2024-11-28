@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Konscious.Security.Cryptography;
+using Serilog;
 
 namespace ProjetoLogin.Utils;
 
@@ -11,7 +12,7 @@ public static class Cryptography
 		return new Argon2id(Encoding.UTF8.GetBytes(password))
 		{
 			Salt = Encoding.UTF8.GetBytes(salt),
-			KnownSecret = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable(AppConstants.AppSecretKey)!),
+			KnownSecret = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable(AppConstants.AppSecretKey.Replace(":", "__"))!),
 			DegreeOfParallelism = 20,
 			MemorySize = 65536,
 			Iterations = 20,
@@ -37,8 +38,9 @@ public static class Cryptography
 
 			return verifier.GetBytes(ByteArraySize).AsSpan().SequenceEqual(hashBytes);
 		}
-		catch
+		catch(Exception ex)
 		{
+			Log.Logger.Error(ex, "Erro ao verificar Hash");
 			return false;
 		}
 	}
