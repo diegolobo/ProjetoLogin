@@ -13,9 +13,6 @@ namespace ProjetoLogin.Models.Usuarios.ViewModels
 		[Required(ErrorMessage = "O campo Nome Completo é obrigatório.")]
 		public string Nome { get; set; }
 
-		[Required(ErrorMessage = "O campo Data de Nascimento é obrigatório.")]
-		public DateTime DataNascimento { get; set; }
-
 		[Required(ErrorMessage = "O campo Email é obrigatório.")]
 		[StringLength(Usuario.EmailMaxLength, ErrorMessage = "O campo Email deve ter no máximo 100 caracteres.")]
 		public string Email { get; set; }
